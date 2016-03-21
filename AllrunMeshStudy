@@ -6,10 +6,10 @@ cd ${0%/*} || exit 1    # Run from this directory
 
 application=`getApplication`
 
-
+cp system/blockMeshDictMs system/blockMeshdict
 #runApplication setFields
 #runApplication $application
-for i in 3 4 5
+for i in 1 2 3 4 5
 do
     case $i in
 	2) sed -i 's/10 50 1/20 100 1/g' system/blockMeshDict
@@ -24,12 +24,12 @@ do
     ./Allclean
     runApplication blockMesh
     runApplication mirrorMesh
-    cp 0/T.org 0/T
+    cp 0/T.ms 0/T
     foamJob -wait buoyantBoussinesqPimpleFoam
     foamLog log
     probeLocations
     sample
-    cp -r ../caseMeshStudy ../meshStudy/caseMeshStudy_$i
+    cp -r ../cooledOilPipe meshStudy/meshStudy_$i
 done
 echo "Done"
 # ----------------------------------------------------------------- end-of-file

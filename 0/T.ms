@@ -9,26 +9,28 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      probesDict;
+    class       volScalarField;
+    object      T;
 }
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Fields to be probed. runTime modifiable!
-fields
-(
-    U
-    T
-);
+dimensions      [0 0 0 1 0 0 0];
 
-// Locations to be probed. runTime modifiable!
-probeLocations
-(
-    (0.0055 0 0.001)
-    (0.0065 0 0.001)
-    (0.0075 0 0.001)
-    (0.011 0 0.001
-    (0 0.012 0.001)
-);
+internalField   uniform 293.15;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+boundaryField
+{
+    inner
+    {
+        type            fixedValue;
+        value           uniform 303.15;
+    }
+    outer
+    {
+        type            fixedValue;
+        value           uniform 293.15;
+    }
+    
+}
+
+// ************************************************************************* //
