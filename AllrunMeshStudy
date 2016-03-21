@@ -1,0 +1,35 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+application=`getApplication`
+
+
+#runApplication setFields
+#runApplication $application
+for i in 3 4 5
+do
+    case $i in
+	2) sed -i 's/10 50 1/20 100 1/g' system/blockMeshDict
+	   ;;
+	3) sed -i 's/20 100 1/40 200 1/g' system/blockMeshDict
+	   ;;
+	4) sed -i 's/40 200 1/80 400 1/g' system/blockMeshDict
+	   ;;
+	5) sed -i 's/80 400 1/160 800 1/g' system/blockMeshDict
+	   ;;
+    esac
+    ./Allclean
+    runApplication blockMesh
+    runApplication mirrorMesh
+    cp 0/T.org 0/T
+    foamJob -wait buoyantBoussinesqPimpleFoam
+    foamLog log
+    probeLocations
+    sample
+    cp -r ../caseMeshStudy ../meshStudy/caseMeshStudy_$i
+done
+echo "Done"
+# ----------------------------------------------------------------- end-of-file
