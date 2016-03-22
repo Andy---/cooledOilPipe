@@ -6,35 +6,41 @@ cd ${0%/*} || exit 1    # Run from this directory
 
 application=`getApplication`
 
-if [ ! -d "../meshstudy/" ]
-then
-    mkdir ../meshStudy
-fi
 
-cp system/blockMeshDictMs system/blockMeshDict
 #runApplication setFields
 #runApplication $application
-for i in 1 2 3 4 5
+for i in 7 8 9 10
 do
     case $i in
-	2) sed -i 's/10 50 1/20 100 1/g' system/blockMeshDict
+	1) sed -i 's/294.15/293.16/g' 0/T.org
 	   ;;
-	3) sed -i 's/20 100 1/40 200 1/g' system/blockMeshDict
+	2) sed -i 's/293.16/293.25/g' 0/T.org
 	   ;;
-	4) sed -i 's/40 200 1/80 400 1/g' system/blockMeshDict
+	3) sed -i 's/293.25/294.15/g' 0/T.org
 	   ;;
-	5) sed -i 's/80 400 1/160 800 1/g' system/blockMeshDict
+	4) sed -i 's/294.15/295.15/g' 0/T.org
 	   ;;
+	5) sed -i 's/295.15/296.15/g' 0/T.org
+	   ;;
+	6) sed -i 's/296.15/297.15/g' 0/T.org
+	   ;;
+	7) sed -i 's/297.15/298.15/g' 0/T.org
+	   ;;
+	8) sed -i 's/298.15/303.15/g' 0/T.org
+	   ;;
+	9) sed -i 's/303.15/313.15/g' 0/T.org
+	   ;;
+	10) sed -i 's/313.15/393.15/g' 0/T.org
     esac
-    ./Allclean
     runApplication blockMesh
     runApplication mirrorMesh
-    cp 0/T.ms 0/T
+    cp 0/T.org 0/T
     foamJob -wait buoyantBoussinesqPimpleFoam
     foamLog log
     probeLocations
     sample
-    cp -r ../cooledOilPipe ../meshStudy/meshStudy_$i
+    cp -r ../cooledOilPipe ../calcRa/Ra_$i
+    ./Allclean
 done
 echo "Done"
 # ----------------------------------------------------------------- end-of-file
