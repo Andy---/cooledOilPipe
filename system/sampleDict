@@ -102,9 +102,9 @@ sets
         axis        x;
 
         //- cavity. Slightly perturbed so not to align with face or edge.
-        start       (0.005 0 0.001);
+        start       (0 0 0.001);
         end         (0.02 0 0.001);
-        nPoints     200;
+        nPoints     300;
     }
 
     /*   lineX2
