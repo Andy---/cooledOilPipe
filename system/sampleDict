@@ -101,23 +101,46 @@ sets
         type        uniform;
         axis        x;
 
-        //- cavity. Slightly perturbed so not to align with face or edge.
+        //x- direction
         start       (-0.02 0 0.001);
-        end         (0.02 0 0.001);
-        nPoints     600;
+        end         (0 0 0.001);
+        nPoints     300;
     }
 
-    /*   lineX2
+    lineX2
     {
-        type        face;
+        type        uniform;
         axis        x;
 
-        //- cavity
-        start       (0.0001 0.0525 0.00501);
-        end         (0.0999 0.0525 0.00501);
+        //x+ direction
+        start       (0 0 0.001);
+        end         (0.02 0 0.001);
+	nPoints     300;
     }
 
-    somePoints
+    lineX3
+    {
+        type        uniform;
+        axis        x;
+
+        //y+ direction
+        start       (0 0 0.001);
+        end         (0 0.02 0.001);
+	nPoints     300;
+    }
+
+    lineX4
+    {
+        type        uniform;
+        axis        x;
+
+        //y- direction
+        start       (0 0 0.001);
+        end         (0 -0.02 0.001);
+	nPoints     300;
+    }
+
+    /*    somePoints
     {
         type    cloud;
         axis    xyz;
