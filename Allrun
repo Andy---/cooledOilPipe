@@ -5,10 +5,17 @@ cd ${0%/*} || exit 1    # Run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 application=`getApplication`
+# runApplication setFields
+# runApplication $application
 
+./Allclean
 runApplication blockMesh
-cp 0/T.org 0/T
-runApplication setFields
-runApplication $application
+runApplication mirrorMesh
+cp 0/T.ms 0/T
+foamJob -wait buoyantBoussinesqPimpleFoam
+foamLog log
+probeLocations
+sample
+cp -r ../cooledOilPipeRef ~/exam/meshStudy_001_Ref2.5
 
 # ----------------------------------------------------------------- end-of-file
