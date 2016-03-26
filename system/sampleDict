@@ -121,7 +121,7 @@ sets
     lineX3
     {
         type        uniform;
-        axis        x;
+        axis        y;
 
         //y+ direction
         start       (0 0 0.001);
@@ -132,7 +132,7 @@ sets
     lineX4
     {
         type        uniform;
-        axis        x;
+        axis        y;
 
         //y- direction
         start       (0 0 0.001);
